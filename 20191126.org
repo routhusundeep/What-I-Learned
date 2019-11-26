@@ -1,0 +1,15 @@
+#+TITLE: Daily Notes Tuesday, 26/11/2019
+** Cache coherency and Memory Barriers       :cache_coherency:memory_barries:
+*** [[https://stackoverflow.com/questions/27595595/when-are-x86-lfence-sfence-and-mfence-instructions-required][link]] 
+talks about the acquire-release consistency and sequential consistency, and about the way to achive them in x86 
+*** [[https://stackoverflow.com/questions/20316124/does-it-make-any-sense-to-use-the-lfence-instruction-on-x86-x86-64-processors][link]]
+gives consise details about LFENCE, SFENCE and MFENCE operations, Intels Specifications are also memtioned. Really helps to understand the consistency levels.
+*** [[https://stackoverflow.com/questions/42746793/does-a-memory-barrier-ensure-that-the-cache-coherence-has-been-completed][link]] 
+very detailed and succint explanation to store buffer and the necessity of fence operations.
+Role of MESI/MOESI/MESIF if also explained.
+Differentiates Cache Coherency, Global Visibility and Memory ordering.
+*** [[https://preshing.com/20120710/memory-barriers-are-like-source-control-operations/][link]]
+Talks about all types of barries with an analogy(which is bit too simplistic)
+*** [[https://preshing.com/20120930/weak-vs-strong-memory-models/][link]]
+A brief description of the weak and strong memory models.
+Sequential consistency is also touched.
