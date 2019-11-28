@@ -25,3 +25,6 @@ The main takeaway points are
 *** bulk load control
 ** [[https://www.postgresql.org/docs/9.5/wal.html][WAL]]
 ** [[https://www.postgresql.org/docs/9.5/high-availability.html][Availability]]
+** [[https://dba.stackexchange.com/questions/42290/configuring-postgresql-for-read-performance/43142#43142][Configuring for Read Performance]]
+A really cool assortment of advises(from SO) to improve Performance of queries in general.
+Go through the links given in the answer to get a better understanding of the internals.
