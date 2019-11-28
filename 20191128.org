@@ -3,26 +3,26 @@
 A succinct and intelligible explanation of the analyze and explain commands in *POSTGRES*. 
 Rather than blindly believing your gut and/or going with trial and error method while optimizing a complex query, it is a much better option to use analyze.
 The main takeaway points are
-*** Types of scans
-**** Sequential Scan
-**** Index Scan
-**** Bitmap Heap Scan
-**** Bitmap Index Scan
-*** Type of joins
-**** Nested Loops
-**** Hash Join
-**** Merge join(main)
-**** Merge join(Index)
-*** Ordering 
-**** will happen in memory
-**** A limit will result in Top N heap sort
-**** On index key will be an index scan
+- Types of scan
+  - Sequential Scan
+  - Index Scan
+  - Bitmap Heap Scan
+  - Bitmap Index Scan
+- Type of joins
+  - Nested Loops
+  - Hash Join
+  - Merge join(main)
+  - Merge join(Index)
+- Ordering 
+  - will happen in memory
+  - A limit will result in Top N heap sort
+  - On index key will be an index scan
 ** [[https://www.postgresql.org/docs/9.5/performance-tips.html][Performance tips]] 
-*** Explain, Explain Analyze and some caveats
-*** Controlling the join
-**** geqo threshold
-**** explicit joins
-*** bulk load control
+- Explain, Explain Analyze and some caveats
+- Controlling the join
+  - geqo threshold
+  - explicit joins
+- bulk load control
 ** [[https://www.postgresql.org/docs/9.5/wal.html][WAL]]
 ** [[https://www.postgresql.org/docs/9.5/high-availability.html][Availability]]
 ** [[https://dba.stackexchange.com/questions/42290/configuring-postgresql-for-read-performance/43142#43142][Configuring for Read Performance]]
