@@ -1,6 +1,5 @@
 #+TITLE: Daily Notes Thursday, 28/11/2019
-** [[https://www.postgresql.eu/events/pgdayparis2018/sessions/session/1778/slides/71/pgday_paris_2018_EXPLAIN.pdf][POSTGRES explain and analyze]]                    :Postgres_explain_analyze:
-A succinct and intelligible explanation of the analyze and explain commands in *POSTGRES*. 
+** [[https://www.postgresql.eu/events/pgdayparis2018/sessions/session/1778/slides/71/pgday_paris_2018_EXPLAIN.pdf][POSTGRES explain and analyze]]                    :postgres_explain_analyze: A succinct and intelligible explanation of the analyze and explain commands in *POSTGRES*. 
 Rather than blindly believing your gut and/or going with trial and error method while optimizing a complex query, it is a much better option to use analyze.
 The main takeaway points are
 - Types of scan
@@ -28,4 +27,4 @@ The main takeaway points are
   - A really cool assortment of advises(from SO) to improve Performance of queries in general.
 Go through the links given in the answer to get a better understanding of the internals.
 ** [[https://www.postgresql.org/docs/9.5/wal.html][WAL]]                                                      :write_ahead_log:
-** [[https://www.postgresql.org/docs/9.5/high-availability.html][Availability]]                                                    :Postgres:
+** [[https://www.postgresql.org/docs/9.5/high-availability.html][Availability]]                                                    :postgres:
