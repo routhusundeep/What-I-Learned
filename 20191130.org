@@ -9,7 +9,7 @@ These are the available isolation levels in PG, and the types of phenomenon each
 | Repeatable read  | Not Possible | Possible             | Possible*     | Possible              |
 | Serializable     | Not Possible | Possible             | Not Possible  | Not Possible          |
   
-`* - is allowed in general as per the definition in Standard SQL, but are not possible in PG
+`* - is allowed in general as per the definition in ANSI SQL, but are not possible in PG
 
 **** Brief description of the phenomenon are
 - *Dirty Reads* - A transaction can read another uncommitted transactions writes
