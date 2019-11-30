@@ -21,10 +21,9 @@ These are the available isolation levels in PG, and the types of phenomenon each
 - RR is achieved by Snapshot isolation using *Multiversion Concurrency Control (/MVCC/)*. 
   - This is the reason Phantoms do not occur
   - *write skews* are possible in case of concurrent transactions, so Sequential consistency is not attainable
-- Serializable is achieved by *Serializable Snapshot Isolation*
-  - [[SSI][This]] explains how SSI is achived in PG.
+- Serializable is achieved by Serializable Snapshot Isolation
  
-**** [[https://drkp.net/papers/ssi-vldb12.pdf][<<SSI>> Serializable snapshot isolation]] :serializable_snapshot_isolation:
+**** [[https://drkp.net/papers/ssi-vldb12.pdf][Serializable snapshot isolation]] :serializable_snapshot_isolation:
 - Talks about simple write skews and another 3-Transaction example which are not serializable with SI
 - How Seriazability is achieved till now
   - some workloads do not experience Serialization Anomalies like TPC-C
