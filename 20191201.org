@@ -28,8 +28,7 @@ The system primarily consists of Parser, Analyzer, Re-writer, Planner, Executor.
 - Create the plan tree
   - Create the tree by storing all the information, like command type, costs, targets etc
 *** Executor
-It executes the nodes of plan tree in order of end to root.  
-note: it might use some temporary files if the result is too large to fit in memory
+It executes the nodes of plan tree in order of end to root. It might use some temporary files if the result is too large to fit in memory
 *** Join Operations
 The above points are only for a single table queries. 
 - Nested Loop Join
