@@ -27,7 +27,7 @@ The system primarily consists of Parser, Analyzer, Re-writer, Planner, Executor.
   - get the cheapest path
 - Create the plan tree
   - Create the tree by storing all the information, like command type, costs, targets etc
-*** Single Executor
+*** Executor
 It executes the nodes of plan tree in order of end to root.  
 note: it might use some temporary files if the result is too large to fit in memory
 *** Join Operations
@@ -38,7 +38,7 @@ The above points are only for a single table queries.
   - The choice of Outer and inner table is important.
 - Merge Join
   - The choice of Outer and inner table is important.
-- Materialized Merge Join
+  - Materialized Merge Join
 - Hash Join
   - In-Memory Hash Join
   - Hybrid Hash Join with Skew
@@ -47,5 +47,6 @@ The above points are only for a single table queries.
 - Get the cheapest path
   - For small number of tables, all the combinations are tried out using a basic dynamic programming algorithm
   - For large number(> gp_threshold), a genetic algorithm is used which I will cover later
+- Execute them in the order determined
 
 
