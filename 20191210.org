@@ -1,0 +1,87 @@
+#+TITLE: Daily Notes Wednesday, 10/12/2019
+** [[https://kth.diva-portal.org/smash/get/diva2:1059537/FULLTEXT01.pdf][flink - stream and batch processing in one engine]] :stream_processing:batch_processing:
+Flink is built on the philosophy that many classes of data processing applications, including real-time analytics, continuous data pipelines, historic data processing(batch) and iterative algorithms(machine learning and graph analytics) can be expressed and executed as pipelined fault-tolerant dataflows.
+- during runtime, it is a DAG of stateful operators connected through data streams.
+- has both DataSet and DataStream API's
+- architecture has client, Job manager and possibly multiple task managers
+- Data Exchange through intermediate Data Streams
+  - Pipelined Data Stream
+    - mostly for continuous streaming to avoid materializing the data
+    - Back pressure will be applied from consumers to producers
+  - Blocking Data Stream
+    - decoupled consumers and producers
+    - naturally requires more memory and frequent spills
+    - example: sort-merge join
+  - Latency and throughput
+    - buffer is sent to consumers when
+      - it is full
+      - timeout
+    - high throughput through larger buffer
+    - high latency by small timeout
+  - Control Events
+    - checkpoint barriers
+      - to coordinate checkpoints by classifying events into pre and post checkpoints
+    - watermarks
+      - conveys the progress of the stream
+    - iteration barriers
+      - signals a stream partition has reached the end of a super-step
+    - ordering
+      - a single event partition guarantees a FIFO order of events
+      - operators receiving multiple streams do not preserve order
+        - example: re-partitioning, broadcasting
+    - Fault Tolerance
+      - guarantees exactly once semantics
+        - to provide this, a persistent data source like Kafka is assumed
+        - otherwise, a WAL can be kept in an operator
+      - This is provided by a technique called Asynchronous Barrier Snapshotting
+        - Barriers are control events injected into the input stream
+        - Barriers correspond to a logical time and will be given an unique ID.
+        - They separate the stream into parts whose effects will be in the snapshot and the part which will be in a later snapshot
+        - Operators with multiple input streams need to align the input streams on the barrier
+          - waits(keeps the received events aside in a buffer) till it receives the barrier from all input stream
+          - once it receives all the barriers, it processes them and emits the barrier itself
+        - before emitting the barrier, the operators snapshots any state it has.
+          - state can be user defined or system state like window
+          - will need a distributed storage
+      - At least once semantics is also supported
+        - used to overcome the latency drop due to align phase
+      - The snapshotting happens in an asynchronous manner
+        - to do this further operations should not affect the ongoing snapshot, typically copy-on-write data structures are used
+        - The state internally can be of three types
+          - Memory states
+          - File system state
+          - Rocks DB state
+          - The advantages of these different states are quite obvious
+      - Recovery is straight forward
+        - the system redeploys the events after the latest checkpoint
+    - Iterative Workflows
+- Stream Analytics
+  - Notion of Time
+    - event time, processing time and ingestion time
+    - skew exists between event time and processing time
+    - low watermarks are injected by the system to avoid arbitrary delays
+      - it says that all events before this watermark time has arrived in the source
+      - Operators use this watermark to internally move their time, they can close certain windows which are dependant on event time once they receive a watermark
+  - State (already discussed)
+  - Windows
+    - all known windows are supported
+      - periodic time window, count window, punctuation, landmark, session, delta windows
+      - out-of-order processing is seamless
+  - Asynchronous stream iterations
+    - supports superstep synchronization also
+      - Bulk Synchronous Parallel model
+    - supports delta iterations
+- Batch analytics
+  - same engine
+  - snapshotting is turned off
+  - dedicated DataSet API
+  - A query optimization layer
+    - Similar to Spark's Catalyst optimizer
+  - Memory management
+    - Custom serialization mechanisms
+    - binary data manipulations
+  - iterations
+
+
+      
+      
