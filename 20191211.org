@@ -70,7 +70,7 @@ A model to represent processing for Unbound, Unordered and global-scale datasets
   - Encourage clarity of implementation
   - Support robust analysis of data in the context under which they occurred
 
-** [[https://arxiv.org/pdf/1905.12133.pdf][One SQL to rule them all]]
+** [[https://arxiv.org/pdf/1905.12133.pdf][One SQL to rule them all]]                               :stream_processing:
 This paper aims to achieve stream processing by SQL alone, current SQL cant do this, they propose some language extensions and primitives to achieve their goal.  
 These are
 1. Time varying relations as a foundation for classical tables as well as streaming data
