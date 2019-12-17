@@ -4,7 +4,7 @@ Attacking the following patterns
 1. Reporting and Dashboarding   
    - Video creators, content holders and stakeholders require access to real time dashboards to understand how their videos and channels are performing
 2. Embedded Statistics -
-   - Many useful statistics are exposed to the uses such as likes or views of a video
+   - Many useful statistics are exposed to the users such as likes or views of a video
 3. Monitoring - 
    - This is very similar to Reporting, but the different lies in that, monitoring is used internally by Engineers, so some support to down-sampling, expiry of old data, approximation functions, time series queries etc is required
 4. Ad-hoc Analysis -   
