@@ -1,9 +1,9 @@
 #+TITLE: Daily Notes Tuesday, 17/12/2019
 ** [[https://blog.acolyer.org/2019/09/11/procella/][Procella - unifying serving and analytical data at youtube]] :database:google:
 Attacking the following patterns
-1. Reporting and Dashboarding  
+1. Reporting and Dashboarding\  
    Video creators, content holders and stakeholders require access to real time dashboards to understand how their videos and channels are performing
-2. Embedded Statistics  
+2. Embedded Statistics\ 
    Many useful statistics are exposed to the uses such as likes or views of a video
 3. Monitoring  
    This is very similar to Reporting, but the different lies in that, monitoring is used internally by Engineers, so some support to down-sampling, expiry of old data, approximation functions, time series queries etc is required
