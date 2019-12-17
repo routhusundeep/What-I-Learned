@@ -1,37 +1,37 @@
 #+TITLE: Daily Notes Tuesday, 17/12/2019
 ** [[https://blog.acolyer.org/2019/09/11/procella/][Procella - unifying serving and analytical data at youtube]] :database:google:
 Attacking the following patterns
-1. Reporting and Dashboarding\  
-   Video creators, content holders and stakeholders require access to real time dashboards to understand how their videos and channels are performing
-2. Embedded Statistics\ 
-   Many useful statistics are exposed to the uses such as likes or views of a video
-3. Monitoring  
-   This is very similar to Reporting, but the different lies in that, monitoring is used internally by Engineers, so some support to down-sampling, expiry of old data, approximation functions, time series queries etc is required
-4. Ad-hoc Analysis  
-   Business analysts, data scientists will perform complex ad-hoc queries which are typically long running and resource intensive
+1. Reporting and Dashboarding   
+   - Video creators, content holders and stakeholders require access to real time dashboards to understand how their videos and channels are performing
+2. Embedded Statistics -
+   - Many useful statistics are exposed to the uses such as likes or views of a video
+3. Monitoring - 
+   - This is very similar to Reporting, but the different lies in that, monitoring is used internally by Engineers, so some support to down-sampling, expiry of old data, approximation functions, time series queries etc is required
+4. Ad-hoc Analysis -   
+   - Business analysts, data scientists will perform complex ad-hoc queries which are typically long running and resource intensive
 With exponential data growth and multiple products, they were facing the problems like
 - Polyglot persistence is leading to multiple ETL jobs, which incur high development and maintenance cost, data quality issues, hard to tract bugs etc
 - data duplication and accessibility issues due to incompatible API's
 - underlying components may not be scalable, efficient when dealing with Youtube level data
 To solve these problems, Procella has
 1. Rich API  
-   Almost complete standard SQL, with additional useful extensions like approximations in aggregations, handling complex nested and recursive schema etc
+   - Almost complete standard SQL, with additional useful extensions like approximations in aggregations, handling complex nested and recursive schema etc
 2. High Scalability  
-   Compute(on Borg, which is a resource manager/scheduler like Yarn) and Storage(on Colossus, which is a distributed data store like Hadoop and Ceph) are separated
+   - Compute(on Borg, which is a resource manager/scheduler like Yarn) and Storage(on Colossus, which is a distributed data store like Hadoop and Ceph) are separated
 3. High Performance  
-   state-of-the-art query execution techniques
+   - state-of-the-art query execution techniques
 4. Data Freshness  
-   High Volume, low latency ingestion is supported in both batch and Stream mode, native support to Lambda Architecture
+   - High Volume, low latency ingestion is supported in both batch and Stream mode, native support to Lambda Architecture
 
 *** Architecture
 **** Google Infrastructure
-1. Disaggregated Storage  
-   All data will be stored in Colossus, which differs from normal file systems, like
+1. Disaggregated Storage -   
+   - All data will be stored in Colossus, which differs from normal file systems, like
    - Data is immutable. A file can be opened and appended to, but once finalized, it cannot be modified
    - Common metadata operations have significant latency especially at tail
    - All durable meta data is remote, so reading data will be at the least a RPC cost
-2. Shared Compute  
-   All servers will run on Borg
+2. Shared Compute - 
+   - All servers will run on Borg
    - Vertical scaling will be challenging and many tasks may run concurrently on the same machine, so to improve overall performance it is better to run many small tasks than a small number of large tasks
    - Machines can be brought down for maintenance, so tasks should be able to recover quickly, this strengths the argument of small and stateless task
    - Machines can be of different configurations, some better, some worse, Performance of a task will be unpredicatable
