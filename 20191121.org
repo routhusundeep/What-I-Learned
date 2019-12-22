@@ -1,9 +1,0 @@
-#+TITLE: Daily Notes Thursday, 21/11/2019
-** [[https://software.rajivprab.com/2018/04/29/myths-programmers-believe-about-cpu-caches/][link]] - a good primer on CPU caches                 :cache:processor:
-a nice overview on cache coherance, java volaties, MESI etc
-** [[https://kernelnewbies.org/Ext4][link]] - a nice overview on ext4                                      :ext4:
-** [[https://zonedstorage.io/introduction/][link]] - zoned storage                                             :storage:
-a novel concept, exposing the underlying log-structure to the application which SSD typically tries to hide resulting in its inefficiency.
-Will be the future of Physical storages.
-** [[https://blog.acolyer.org/2019/11/06/ceph-evolution/][link]] - Files Systems unfit as Distributed Storage Backends :distributed_file_system:
-An idea that the distributed FS should have completely different approach to FS when compared with traditional local FS like Btrfs, XFS or Ext4
