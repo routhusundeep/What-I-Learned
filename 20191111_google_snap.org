@@ -1,0 +1,10 @@
+#+TITLE: Daily Notes Monday, 11/11/2019
+
+** [[https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/][link]] - parse, dont validate        :functional_programming:design_pattern:
+A wonderful idea, which I have used quite a few times, but was unable to connect the dots and figure out the underlying abstraction. It is idea primarily for type driven design.
+Most of the time, this is a destination to my ever evolving software.
+*** Read about [[http://langsec.org/][LANGSEC]] to know more about this philosophy
+** [[https://ai.google/research/pubs/pub48630/][link]] - snap - a microkernel approach to host networking :microkernel:google:networking:
+This is an attempt to overcome the fallbacks of the current monolithic kernels, which has been an successful venture, as google has been using this for its cloud infrastructure for more than 3 years.
+Micro kernels are an interesting topic, they have far reaching outcomes mostly due to their modularity.
+

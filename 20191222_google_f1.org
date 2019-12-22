@@ -1,0 +1,113 @@
+#+TITLE: Daily Notes Sunday, 22/12/2019
+** [[https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41344.pdf][F1]]                                            :database:relational:google:
+It is a fault-tolerant, globally-distributed OLTP and OLAP data database built as the storage system for google's adwords system. It was designed to replace a sharded MYSQL implementation that was not able to meet our growing scalability and reliability requirements. The key goals of the design are 
+1. Scalability
+2. Availability
+3. Consistency
+4. Usability
+Recent research has suggested that these goals are mutually exclusive, A key contribution of this paper is to show how we achieved these goals and where the trade-off's are made. F1 is made on top of spanner which provide extremely scalable data storage, synchronous replication, and strong consistency and ordering properties. F1 inherits these properties and add a few more
+- Distributed SQL queries, including joining data from external sources
+- Transactionally consistent secondary storage
+- Asynchronous schema changes including database re-organization
+- Optimistic transaction
+- Automatic change history recording and publishing
+typical reads and write have higher latencies, some techniques are developed to hide that increased latencies
+- data clustering is made explicit in the schema using tables with hierarchical structures and columns with structured data types, this improved data locality so RPC cost to read remote data is decreased
+- makes heavy use of batching, parallelism and asynchronous reads, new ORM is used which makes these concepts explicit, this places an upper bound on the number of RPC calls required
+*** Basic Architecture
+- F1 clients talks with the load-balancer which in turn calls a F1 server
+- clients prefer to talk a server in the same datacenter, but this is not always possible
+- servers are co-located in the same datacenter as the Spanner servers storing the data, so data access is generally fast
+- Spanner servers retrieve the data from colossus, unlike Spanner colossus is not globally replicated service
+- Queries can run in a centralized or distributed fashion
+- Distributed execution is preferred whenever query engines says so, this execution runs on slave servers which are maintained by a master
+- it is possible to run map reduce jobs also for large scale data processing, the map reduce processes can directly talk with spanner servers
+**** Spanner
+- handles lower storage issues like persistence, caching, replication, fault tolerance, data sharding and movement, location lookups and transactions
+- rows are paritioned into clusters called directories using ancestry relationships in the schema
+- Groups store a collection of directories
+- Each group has one replica tablet per datacenter
+- data is replicated synchronously using the Paxos algorithm
+- provides serializable pessimistic transactions using strict two phase locking
+- Transactions are most efficient when writing to the same group
+- provides strict timestamp semantics, which are used for global ordering for a commit
+- timestamps are used to read multi versioned consistent reads, taking snapshots of current reads without any locks
+- global safe timestamp is provided, which gives a lower bound to the next commit
+*** Data Model
+**** Hierarchical Schema
+- very similar to Relational model with some extensions like hierarchical tables and columns with protocol buffers data types
+- Look at the example in the Paper to get a good idea of the logical and physical layout
+**** Protocol buffers
+- Integrating protocol buffers into the schema removes impedance mismatch and provides an universal schema in both database and application
+**** Indexing
+- All indexes are transactional and fully consistent
+- stored in separate table in Spanner, keyed by a concatenation of the index key and indexed table primary key
+- Local index must have root rows primary key as prefix, they are stored in the same directory so have low update cost
+- in contrast global indexes do not have root rows primary key as prefix, they are shared across many directories and need a 2PC to keep them consistent
+*** Schema Changes
+They are fully non-blocking
+- applies asynchronously on different F1 servers
+- so data updates can happen simultaneously on different schemas, this can lead to data anomalies
+- Enforce that at most two schemas can exist simultaneously of different F1 servers, grant leases to the schema and ensure that no server uses a schema after lease expiry
+- Subdividing each schema change into multiple phases where consecutive pairs of schema changes are mutually compatible and do not cause any anomaly
+- see the paper for a concrete example
+*** Transactions
+Each F1 transaction consists of multiple reads, optionally followed by a single write that commits the transaction, F1 provides three types of transactions
+- Snapshot transaction
+  - read-only transactions with snapshot semantics, reading repeatable data as of a fixed Spanner snapshot timestamp (which is by default the global safe timestamp)
+- Pessimistic transaction
+  - Same as a Spanner transaction, read the Spanner paper for more information
+- Optimistic transaction
+  - before committing, if the timestamp of the row read is modified, it is aborted/restarted
+  - It is used by default
+  - Advantages
+    - Tolerates misbehaving clients - since reads never hold any lock and never conflict with any writes, bad clients who run long running transactions without aborting them can be tolerated
+    - Long lasting transactions - same reason as above
+    - Server side retriability - can be retried by F1 server, which hides any transient Spanner errors
+    - Server failover - All state is kept on clent, so reads and commits can be sent to different F1 servers
+    - Speculative writes - previously read timestamp can be used for the next transaction
+  - Drawbacks
+    - Insertion phantoms, newly inserted rows wont be reflected in the timestamps modified
+    - Low throughput under high contention - transaction need to retried a lot of times
+**** Locking granularity
+- row level locking is provided by default
+- can add new columns to provide more customizable locks
+- at extremes, can provide column level locking
+*** Change history
+- Change tracked by default
+- Can be opted out in the schema
+- stored as a separate table, which is a child table to the original table
+- this table will have the same primary key, the initial and modified column values
+- It is a protobuf entry
+- The changes can be notified to listeners through a Pub/Sub channel which is natively supported by Spanner, it guarantees an atleast once semantics
+*** Client Design
+**** Simplified ORM
+General ORM anti-patterns are avoided
+- Obscuring database operations from developers
+- Serial reads, including for loops which do one query per iteration
+- Implicit joins, adding unwanted joins and loading unnecessary data "just in case"
+The new ORM layer does not use any joins and does not implicitly traverse any relationships between records, All Object loading is explicit, the resulting code will be slightly more complex
+**** NoSQL interface
+- a key/value based interface is provided which is used by the ORM internally
+**** SQL interface
+- provides a full fledged SQL interface
+- supports joining data with Spanner, BigTable tables
+*** Query Processing
+Has the following key properties
+- either low-latency centralized or high parallel distributed
+  - centralized runs entirely on F1 server
+  - distributed always use snapshot transactions
+- All data is remote and batching is used extensively to mitigate the network latency
+- input and output data are arbitrarily partitioned, and has few useful ordering properties
+- use a lot of hash based partitioning
+- individual data operators are designed to stream data
+- Hierarchical tables has optimized access methods
+- Query data can be consumed in parallel
+- first class support for protobufs
+*** Deployment
+deployed to 5 datacenters
+*** Latency and Throughput
+- read latency of 5-10ms and commit latency of 50-150ms
+- overall user latency is 200ms, similar to MYSQL
+- Very efficient throughput for batch queries
+- Resource cost is typically higher than MYSQL

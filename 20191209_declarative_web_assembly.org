@@ -1,0 +1,8 @@
+#+TITLE: Daily Notes Monday, 09/12/2019
+** [[https://blog.acolyer.org/2019/12/04/declarative-assembly-of-web-applications-from-pre-defined-concepts/][Declarative assembly of web applications]]    :declarative_web_applications:
+A approach of designing web application with a no-code/low-code/drag-and-drop-from-out-catalog style of design.
+Like Adrian, I too am not a fan of such CASE(Computer aided software engineering) tools.
+Most of the time, the problems mentioned will have clean solution because the chosen abstraction will be very well suited to them, I would like to analyze an example where this proposed concepts does not suite the design, will it be worth going along with the cumbersome workarounds for those problems?
+
+** will read about stream and batch processing in the future
+flink, spark, tez and their internal details

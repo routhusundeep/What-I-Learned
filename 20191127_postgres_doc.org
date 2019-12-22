@@ -1,0 +1,4 @@
+#+TITLE: Daily Notes Wednesday, 27/11/2019
+** [[https://www.postgresql.org/docs/9.5/index.html][link]] - Postgres Documentation                                   :Postgres:
+in the following few days, I will go through the implementation detail of Postgres.
+I made this decision as I am planning to go through various NoSQL databases in the future and a thorough understanding of a classing RDBMS is definitely a good idea.

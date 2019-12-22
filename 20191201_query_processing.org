@@ -1,0 +1,51 @@
+#+TITLE: Daily Notes Sunday, 01/12/2019
+** [[http://www.interdb.jp/pg/pgsql03.html][Query Processing]]                                        :query_processing:
+The system primarily consists of Parser, Analyzer, Re-writer, Planner, Executor. The intent of these component are quite trivial, briefly they do the following 
+- Parser - generates a parse tree from a plain SQL
+- Analyzer - Does a semantic analysis of the parser tree
+- Re-writer - Transforms the query tree using a stated set of rules
+- Planner - Figures out the most efficient plan to the query tree
+- Executor - executes the query as per the generated plan
+  
+*** Cost Classification
+- Terminology
+  - start-up - cost expended before the first tuple is fetched
+  - run - cost to fetch all the tuples
+  - total - combined cost of start-up and run
+- Sequential Scan
+- Index Scan
+  - These links give a more detailed explanation, [[https://postgrespro.com/blog/pgsql/3994098][link1]], [[https://postgrespro.com/blog/pgsql/4161264][link2]], [[https://postgrespro.com/blog/pgsql/4161321][hash]], [[https://postgrespro.com/blog/pgsql/4161516][B-Tree]], [[https://postgrespro.com/blog/pgsql/4175817][GIST]], [[https://habr.com/en/company/postgrespro/blog/446624/][SP-GIST]], [[https://habr.com/en/company/postgrespro/blog/448746/][GIN]], [[https://habr.com/en/company/postgrespro/blog/452900/][BRIN]], (I will read all of them thoroughly in the future)
+- Sort
+*** Single Plan Tree
+- Prepocessing 
+  - Simplifying targets, like re-writing 2+2=4
+  - Normalizing Boolean expression
+  - Flattening and, or expressions
+- Cheapest Path
+  - Store the access paths and their corresponding costs
+  - Estimate cost of all possible paths
+  - get the cheapest path
+- Create the plan tree
+  - Create the tree by storing all the information, like command type, costs, targets etc
+*** Executor
+It executes the nodes of plan tree in order of end to root. It might use some temporary files if the result is too large to fit in memory
+*** Join Operations
+The above points are only for a single table queries. 
+- Nested Loop Join
+  - Materialized Nested Loop Join
+- Indexed Nested Loop Join
+  - The choice of Outer and inner table is important.
+- Merge Join
+  - The choice of Outer and inner table is important.
+  - Materialized Merge Join
+- Hash Join
+  - In-Memory Hash Join
+  - Hybrid Hash Join with Skew
+*** Multiple Table Query
+- Preprocessing
+- Get the cheapest path
+  - For small number of tables, all the combinations are tried out using a basic dynamic programming algorithm
+  - For large number(> gp_threshold), a genetic algorithm is used which I will cover later
+- Execute them in the order determined
+
+
