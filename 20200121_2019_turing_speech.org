@@ -1,0 +1,25 @@
+#+TITLE: Daily Notes Tuesday, 21/01/2020
+** [[http://composition.al/CMPS290S-2018-09/2018/12/14/an-overview-of-erlang.html][An Overview of Erlang]]                                             :erlang:
+Armstrong coined the term COPL, which stands for concurrency-oriented-programming for Erlang. Essential characteristics of COPL are
+1. Processes are lightweight, i.e both creation and destruction of processes are not heavy on the processor
+2. Processes are isolated, failures of one process will not impact any other process
+3. Processes have unique PID which is not forgeable
+4. There is no state shared between the processes
+5. Message passing does not guarantee delivery, and are pure (no dangling pointers or data references)
+6. Processes can detect the occurrence of, and the reason for failures of the processes
+*** Fault Tolerance
+main strategy is, try to perform a task, if unsuccessful, try to perform a simpler task
+- Supervision hierarchy
+  - The above idea will create an hierarchy of tasks
+  - A system failure occurs if the lowest level task cannot be performed
+  - detects and attempts to stop propagation of errors upwards
+  - A supervisor needs to know how to start and stop each worker under it
+*** Programming Model
+- Process creation
+  - A PID is returned on calling spawn()
+- Message Passing
+  - is the only form of communication between the processes
+  - receive() asks the process to wait for a message from another process
+- Linking
+  - chain() function allows linking of processes
+** [[https://www.youtube.com/watch?v=3LVeEjsn8Ts&app=desktop][2017 ACM Turing]]                                             :turing_award:
