@@ -1,3 +1,0 @@
-#+TITLE: Daily Notes Saturday, 26/10/2019
-
-* Started a project to learn Haskell
