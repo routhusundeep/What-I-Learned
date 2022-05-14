@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "README.md",
+            "file": "20191121_ceph.md",
             "mode": "source",
             "source": false
           }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "20191121_ceph.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -101,10 +101,15 @@
   },
   "active": "764e61349ce546b5",
   "lastOpenFiles": [
-    "README.md",
+    "20191121_ceph.md",
+    "Storage/EXT4.md",
+    "Cache/Common Myths.md",
+    "Cache/Cache Cohenrency and Memory Consistency.md",
+    "Storage/Inode.md",
+    "Real World Systems/Snap - A microkernel approach to host networking.md",
+    "Design Principle/Taxonomy of Langsec Errors.md",
+    "Design Principle/parse, don't validate.md",
     "Distributed System/Conceptual Framework For Fault Tolerance.md",
-    "README.md",
-    "Distributed System/Conceptual Framework For Fault Tolerance 1.md",
-    "[.md"
+    "README.md"
   ]
 }
