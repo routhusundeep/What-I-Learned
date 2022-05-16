@@ -23,5 +23,5 @@ Within a POSIX system, a file has the following attributes  which may be retriev
 - Historically, it was possible to [hard link](https://en.wikipedia.org/wiki/Hard_link "Hard link") directories.
 - file's inode number stays the same when it is moved to another directory on the same device
 - It is possible for a device to run out of inodes.
-- Inlining file data in Inode is possible, [Ext4](https://en.wikipedia.org/wiki/Ext4 "Ext4") has a file system option called `inline_data` that allows ext4 to perform inlining if enabled during file system creation. Because an inode's size is limited, this only works for very small files.
+- Inlining file data in Inode is possible, [Ext4](https://en.wikipedia.org/wiki/Ext4 "Ext4") has a file system option called `inline_data` that allows it to perform inlining if enabled during file system creation. Because an inode's size is limited, this only works for very small files.
 

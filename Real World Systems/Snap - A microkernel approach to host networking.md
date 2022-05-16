@@ -1,4 +1,4 @@
-#microkernel #google #networking #did_not_complete
+#microkernel #google #networking #did_not_complete #real_world_system 
 [paper](https://ai.google/research/pubs/pub48630/)
 
 The host networking needs of large-scale Internet services providers are vast and rapidly evolving. Continuous capacity growth demands novel approaches to edge switching and bandwidth management, the rise of cloud computing necessitates rich virtualization features, and high-performance distributed systems continually seek more efficient and lower latency communication.
