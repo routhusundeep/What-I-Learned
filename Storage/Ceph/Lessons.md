@@ -1,11 +1,13 @@
 #distributed_file_system #real_world_system 
 
-#### [[Lessons#BlueStore A Clean-Slate Approach|BlueStore]]
+[paper](https://dl.acm.org/doi/10.1145/3341301.3359656)
+
+#### BlueStore
 A new backend designed to run directly on raw storage devices. By running in user space and fully controlling the I/O stack, it has enabled space-efficient metadata and data checksums, fast overwrites of erasure-coded data, inline compression, decreased performance variability, and avoided a series of performance pitfalls of local file systems. Finally, it makes the adoption of backwards-incompatible storage hardware possible, an important trait in a [[Shingled magnetic recording|changing storage ecosystem]]
 
 **Problems Ceph faced.**
 - Efficient Transactions
-	- Existing Approaches have perf overhead, limited functionality, complex
+	- Existing Approaches have performance overhead, limited functionality, complex
 	- can't leverage internal FS transaction mechanism
 - Fast Metadata Operations
 	- a key challenge that the Ceph team faced was enumerating directories with millions of entries fast, and the lack of ordering in the returned result
