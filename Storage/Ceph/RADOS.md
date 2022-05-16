@@ -1,4 +1,4 @@
-#distributed_file_system #real_world_system
+#distributed_file_system
 
 [paper](https://ceph.com/assets/pdfs/weil-rados-pdsw07.pdf)
 

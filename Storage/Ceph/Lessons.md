@@ -1,4 +1,4 @@
-#distributed_file_system 
+#distributed_file_system #real_world_system 
 
 #### [[Lessons#BlueStore A Clean-Slate Approach|BlueStore]]
 A new backend designed to run directly on raw storage devices. By running in user space and fully controlling the I/O stack, it has enabled space-efficient metadata and data checksums, fast overwrites of erasure-coded data, inline compression, decreased performance variability, and avoided a series of performance pitfalls of local file systems. Finally, it makes the adoption of backwards-incompatible storage hardware possible, an important trait in a [[Shingled magnetic recording|changing storage ecosystem]]
