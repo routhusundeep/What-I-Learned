@@ -1,3 +1,4 @@
+#amazon
 [link](https://www.youtube.com/watch?v=yvBR71D0nAQ)
 
 DynamoDB has changed a lot when compared with the [[Dynamo|original]] paper.
