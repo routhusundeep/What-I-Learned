@@ -1,0 +1,120 @@
+{
+  "main": {
+    "id": "2faf622a691ae45c",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d3f53944d79fd15",
+        "type": "leaf",
+        "state": {
+          "type": "diff-view",
+          "state": {
+            "file": "Database/Dynamo.md",
+            "staged": true
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cd17974c4e077441",
+    "type": "split",
+    "children": [
+      {
+        "id": "453ddabc3941a788",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "95100145489da03c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "58e288a472b87084",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d5952aeeb5f7b441",
+    "type": "split",
+    "children": [
+      {
+        "id": "bd24db614725827c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6e360f1ae4901601",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8aab869809eb6c5d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "07ba02f1a7bfc5ea",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "active": "4d3f53944d79fd15",
+  "lastOpenFiles": [
+    "Load Balancer/Maglev.md",
+    "Database/Dynamo.md",
+    "Database/DynamoDB 2018.md",
+    "Load Balancer/Taji.md",
+    "20191125_fb_taiji_and_google_gfs.md",
+    "README.md",
+    "Performance/Tail Latency.md",
+    "Design/Traits.md",
+    "Collaboration/Local First.md",
+    "20191123_local_first_software.md"
+  ]
+}
