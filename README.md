@@ -1,1 +1,1 @@
-All things I have learned
+Various things I have learned

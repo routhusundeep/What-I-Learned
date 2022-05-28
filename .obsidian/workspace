@@ -9,8 +9,8 @@
         "state": {
           "type": "diff-view",
           "state": {
-            "file": "Database/Dynamo.md",
-            "staged": true
+            "file": "Load Balancer/Maglev.md",
+            "staged": false
           }
         }
       }
@@ -106,15 +106,15 @@
   },
   "active": "4d3f53944d79fd15",
   "lastOpenFiles": [
-    "Load Balancer/Maglev.md",
-    "Database/Dynamo.md",
-    "Database/DynamoDB 2018.md",
     "Load Balancer/Taji.md",
     "20191125_fb_taiji_and_google_gfs.md",
+    "Load Balancer/Maglev.md",
     "README.md",
-    "Performance/Tail Latency.md",
-    "Design/Traits.md",
-    "Collaboration/Local First.md",
-    "20191123_local_first_software.md"
+    "Storage/Ceph/RADOS.md",
+    "Storage/EXT4.md",
+    "Storage/Inode.md",
+    "Storage/Shingled magnetic recording.md",
+    "Storage/Ceph/Lessons.md",
+    "Distributed Systems/Conceptual Framework For Fault Tolerance.md"
   ]
 }
