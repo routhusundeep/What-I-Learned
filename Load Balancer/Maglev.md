@@ -1,5 +1,6 @@
 #real_world_system #google #load_balancer 
 
+[paper](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44824.pdf)
 #### Maglev: A Fast and Reliable Software Network Load Balancer
 
 A network load balancer is typically composed of multiple devices logically located between routers and service endpoints.
