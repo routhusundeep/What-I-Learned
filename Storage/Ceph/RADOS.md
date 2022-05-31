@@ -15,12 +15,13 @@ A RADOS system consists of a large collection of OSD's and a small group of moni
 
 #### Cluster Map
 The map specifies which OSD's are included in the cluster and compactly specifies the distribution of all data in the system across those devices. It is replicated by every storage node as well as clients interacting with the RADOS cluster.
+Each time the cluster map changes due to an OSD status change (e. g., device failure) or other event effecting data layout, the map epoch is incremented. 
 
 #### Data Placement
 RADOS employs a data distribution policy in which objects are pseudo-randomly assigned to devices. When new storage is added, a random sub-sample of existing data is migrated to new devices to restore balance.
 Each object stored by the system is first mapped into a placement group (PG), a logical collection of objects that are replicated by the same set of device.
 
-Each object’s PG is determined by a hash of the object name o, the desired level of replication r, and a bit mask m that controls the total number of placement groups in the system. That is, pgid = (r, hash(o)&m), mask m = 2k −1, constraining the number of PGs by a power of two.
+Each object’s PG is determined by a hash of the object name o, the desired level of replication r, and a bit mask m that controls the total number of placement groups in the system. That is, pgid = (r, hash(o)&m), mask m = 2^k −1, constraining the number of PGs by a power of two.
 
 PG's are assigned to OSD's using [CRUSH](https://ceph.com/assets/pdfs/weil-crush-sc06.pdf)
 
@@ -28,8 +29,7 @@ PG's are assigned to OSD's using [CRUSH](https://ceph.com/assets/pdfs/weil-crush
 The cluster map includes a description and current state of devices over which data is distributed. This includes the current network address of all OSD's that are currently online and reachable (up), and an indication of which devices are currently down.
 
 #### Map Propagation
-differences in map epochs are significant only when they vary between two communicating OSD's (or between a client and OSD), which must agree on their proper roles with respect to the particular PG the I/O references. This property allows RADOS to  
-distribute map updates lazily by combining them with existing inter-OSD messages, effectively shifting the distribution burden to OSD's.
+Differences in map epochs are significant only when they vary between two communicating OSD's (or between a client and OSD), which must agree on their proper roles with respect to the particular PG the I/O references. This property allows RADOS to distribute map updates lazily by combining them with existing inter-OSD messages, effectively shifting the distribution burden to OSD's.
 
 ### Intelligent Storage Devices
 RADOS currently implements n-way replication combined with per-object versions and short-term logs for each PG. Replication is performed by the OSD's themselves: clients  
