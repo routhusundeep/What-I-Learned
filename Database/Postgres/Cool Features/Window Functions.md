@@ -73,4 +73,4 @@ salary |  sum
 (10 rows)
 ```
 
-You can find the syntax [here](https://www.postgresql.org/docs/15/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS)
+You can find the syntax [here](https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS)

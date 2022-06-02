@@ -15,7 +15,10 @@ Dictionaries allow fine-grained control over how tokens are normalized. With app
 -   Map different variations of a word to a canonical form using an Ispell dictionary.
 -   Map different variations of a word to a canonical form using Snowball stemmer rules.
 
+
 #### Basic Matching
+[This](https://dba.stackexchange.com/questions/10694/pattern-matching-with-like-similar-to-or-regular-expressions-in-postgresql) is very good explanation of how pattern matching is done.
+
 Full text searching in PostgreSQL is based on the match operator `@@`, which returns `true` if a `tsvector` (document) matches a `tsquery` (query). It doesn't matter which data type is written first:
 ```SQL
 SELECT 'a fat cat sat on a mat and ate a fat rat'::tsvector @@ 'cat & rat'::tsquery;
