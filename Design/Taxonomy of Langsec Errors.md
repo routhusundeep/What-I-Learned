@@ -17,7 +17,7 @@ Language-theoretic security (LangSec) is the idea that many security issues can 
 Shotgun parsing is a programming antipattern whereby parsing and input-validating code is mixed with and spread across processing code—throwing a cloud of checks at the input, and hoping, without any systematic justification, that one or another would catch all the “bad” cases.
 
 - **Non-Minimalist Input-handling Code**
-Input-handling code should be minimalist in computing power. A regular language should be handled by a finite automaton implementa- tion, not by a pushdown one, nor by a more powerful model.
+Input-handling code should be minimalist in computing power. A regular language should be handled by a finite automaton implementation, not by a pushdown one, nor by a more powerful model.
 
 - **Input Language More Complex than Deterministic Context-Free**
 We recommend not letting language complexity go above deterministic context-free (DCF) first and foremost because of the issue of parser equivalence.
@@ -37,7 +37,7 @@ The traditional “robustness principle” dictates that one should “be libera
 ### Remidies
 - **Completely separate input validation from application  logic**
 Avoid writing shotgun parsers. Input should be fully validated by a machine expressible as a deterministic push-down automaton.
-Parsing of a basic interchange format into an internal  representation is sometimes referred to as canonicalization.
+Parsing of a basic interchange format into an internal representation is sometimes referred to as canonicalization.
 
 - **Minimize complexity of pre-validation code**
 In general, the code responsible for input canonicalization and validation should be constrained to just those functions. This is not the place to introduce application logic.
