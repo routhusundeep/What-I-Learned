@@ -1,4 +1,5 @@
 [IETF](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-step-up-authn-challenge)
+#oauth
 
 ### Abstract 
 It is not uncommon for resource servers to require different authentication strengths or freshness according to the characteristics of a request. This document introduces a mechanism for a resource server to signal to a client that the authentication event associated with the access token of the current request doesn't meet its authentication requirements and specify how to meet them.

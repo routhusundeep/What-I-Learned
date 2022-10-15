@@ -1,4 +1,5 @@
 [RFC](https://www.rfc-editor.org/rfc/rfc8414)
+#oauth
 
 ### [1](https://www.rfc-editor.org/rfc/rfc8414#section-1).  Introduction
 This specification generalizes the metadata format defined by "OpenID Connect Discovery 1.0" in a way that is compatible with OpenID Connect Discovery while being applicable to a wider set of OAuth 2.0 use cases.  This is intentionally parallel to the way that "OAuth 2.0 Dynamic Client Registration Protocol" generalized the dynamic client registration mechanisms defined by "OpenID Connect Dynamic Client Registration 1.0" in a way that is compatible with it.

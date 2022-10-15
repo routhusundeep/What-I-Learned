@@ -1,4 +1,5 @@
 [RFC](https://www.rfc-editor.org/rfc/rfc7009)
+#oauth
 
 ### [1](https://www.rfc-editor.org/rfc/rfc7009#section-1).  Introduction
 The OAuth 2.0 core specification defines several ways for a client to obtain refresh and access tokens.  This specification supplements the core specification with a mechanism to revoke both types of tokens.  A token is a string representing an authorization grant issued by the resource owner to the client.  A revocation request will invalidate the actual token and, if applicable, other tokens based on the same authorization grant and the authorization grant itself.
