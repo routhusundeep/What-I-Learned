@@ -1,6 +1,6 @@
 
 ### Serializable snapshot isolation 
-[paper](https://drkp.net/papers/ssi-vldb12.pdf)
+[paper](https://arxiv.org/pdf/1208.4179.pdf)
 #isolation
 
 - Talks about simple write skews and another 3-Transaction example which are not serializable with SI
