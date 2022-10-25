@@ -1,5 +1,5 @@
 ### [Transaction Isolation](https://www.postgresql.org/docs/9.5/transaction-iso.html)
-#postgres #isolation
+#postgres #isolation #serializability
 
 These are the available isolation levels in PG, and the types of phenomenon each of them avoid.  
 
