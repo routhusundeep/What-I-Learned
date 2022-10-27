@@ -12,7 +12,7 @@ The Heap Only Tuple (HOT) feature eliminates redundant index entries and allows 
 	- this is risky in the presence of possibly-buggy user-defined functions in functional indexes
 	- We want to do vaccuuming without invoking user defined functions
 
-**HOT solves it for restricted but useful special case: where a tuple is repeatedly updated in ways that do not change its indexed columns.**
+**HOT solves it for a restricted but useful special case: where a tuple is repeatedly updated in ways that do not change its indexed columns.**
 An additional property of HOT is that it reduces index size by avoiding the creation of identically-keyed index entries. This improves search speeds.
 
 #### Update Chains With a Single Index Entry
