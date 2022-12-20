@@ -1,3 +1,4 @@
+#postgres #sql
 [wiki](https://www.postgresql.org/docs/current/functions-datetime.html)
 
 ### Intervals

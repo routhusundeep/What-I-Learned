@@ -1,3 +1,4 @@
+#postgres #sql
 Trivial types are not stated here.
 
 ### Range Types

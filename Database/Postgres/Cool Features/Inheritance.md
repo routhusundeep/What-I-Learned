@@ -1,3 +1,4 @@
+#postgres #sql
 ```SQL
 CREATE TABLE cities (
     name            text,

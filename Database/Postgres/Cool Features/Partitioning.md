@@ -1,3 +1,4 @@
+#postgres #sql
 Types: 
 - Range Partitioning
 - List Partitioning

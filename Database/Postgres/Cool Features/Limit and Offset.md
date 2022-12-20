@@ -1,3 +1,4 @@
+#postgres #sql
 ```SQL
 SELECT select_list
     FROM table_expression

@@ -1,3 +1,4 @@
+#postgres #sql
 Here is an example to use row level policies
 ```SQL
 -- Simple passwd-file based example

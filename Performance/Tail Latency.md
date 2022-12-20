@@ -1,4 +1,5 @@
-#distributed_systems #easy_to_read
+#distributed_systems #easy_to_read #performance
+
 [link](https://cacm.acm.org/magazines/2013/2/160173-the-tail-at-scale/fulltext) 
 
 Temporary high-latency episodes (unimportant in moderate-size systems) may come to dominate overall service performance at large scale.

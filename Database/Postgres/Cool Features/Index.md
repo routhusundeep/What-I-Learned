@@ -1,3 +1,4 @@
+#postgres #sql
 ### Types
 #### B-Tree
 B-trees can handle equality and range queries on data that can be sorted into some ordering. In particular, the PostgreSQL query planner will consider using a B-tree index whenever an indexed column is involved in a comparison using one of these operators:

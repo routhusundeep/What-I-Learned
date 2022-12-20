@@ -1,3 +1,4 @@
+#postgres #sql
 [link](https://dba.stackexchange.com/questions/42290/configuring-postgresql-for-read-performance/43142#43142) gives some tips for read performance optimization
 ### Explain
 PostgreSQL devises a _query plan_ for each query it receives. The structure of a query plan is a tree of _plan nodes_. Nodes at the bottom level of the tree are scan nodes: they return raw rows from a table.

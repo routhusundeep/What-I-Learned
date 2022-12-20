@@ -1,3 +1,5 @@
+#postgres #sql
+
 ### Grouping Sets, ROLL UP And CUBE
 ```SQL
 SELECT * FROM items_sold;
