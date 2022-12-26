@@ -1,13 +1,13 @@
 #postgres #relational_database #index
 
 In PostgreSQL, indexes are special database objects mainly designed to speed up data access. They are auxiliary structures: each index can be deleted and recreated back from the information in the table.
-Despite all differences between types of indexes (also called access methods), each of them eventually associates a key (for example, the value of the indexed column) with table rows that contain this key. Each row is identified by TID (tuple id), which consists of the number of block in the file and the position of the row inside the block.
+Despite all differences between types of indexes (also called access methods), each of them eventually associates a key (for example, the value of the indexed column) with table rows that contain this key. Each row is identified by TID (tuple ID), which consists of the number of block in the file and the position of the row inside the block.
 It is important to understand that an index speeds up data access at a certain maintenance cost. For each operation on indexed data, whether it be insertion, deletion, or update of table rows, indexes for that table need to be updated too, and in the same transaction. Note that update of table fields for which indexes haven't been built does not result in index update; this technique is called HOT ([[Heap Only Tuples]]).
 
 Extensibility entails some implications. To enable easy addition of a new access method to the system, an interface of the general indexing engine has been implemented. Its main task is to get TIDs from the access method and to work with them:
 - Read data from corresponding versions of table rows.
 - Fetch row versions TID by TID or in a batch using a prebuilt bitmap.
-- Check visibility of row versions for the current transaction taking into account its isolation level.
+- Check visibility of row versions for the current transaction, taking into account its isolation level.
 
 All the rest is the task of the access method:
 - Implement an algorithm for building the index and map the data into pages (for the buffer cache manager to uniformly process each index).
@@ -84,7 +84,7 @@ postgres=# explain (costs off) select * from t where a <= 40000;
 (2 rows)
 ```
 
-The thing is that indexes work the better the higher the condition selectivity, that is, the fewer rows match it. Growth of the number of retrieved rows increases overhead costs of reading index pages.
+The thing is that indexes work the better, the higher the condition selectivity, that is, the fewer rows match it. Growth of the number of retrieved rows increases overhead costs of reading index pages.
 
 #### Covering indexes
 As a rule, the main task of an access method is to return the identifiers of matching table rows for the indexing engine to read necessary data from these rows. But what if the index already contains all the data needed for the query? Such an index is called _covering_, and in this case, the optimizer can apply the _index-only scan_:
@@ -190,7 +190,7 @@ postgres=# explain (costs off) select * from t order by a;
 ```
 
 #### Concurrent building
-Usually building of an index acquires a SHARE lock for the table. This lock permits reading data from the table, but forbids any changes while index is being built.
+Usually building of an index acquires a SHARE lock for the table. This lock permits reading data from the table, but forbids any changes while the index is being built.
 We can make sure of this if, say, during building of an index on the table "t", we perform the query below in another session:
 
 ``` SQL
