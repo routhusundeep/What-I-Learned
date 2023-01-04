@@ -1,5 +1,7 @@
 #postgres #relational_database #index
 
+[link](https://postgrespro.com/blog/pgsql/3994098)
+
 In PostgreSQL, indexes are special database objects mainly designed to speed up data access. They are auxiliary structures: each index can be deleted and recreated back from the information in the table.
 Despite all differences between types of indexes (also called access methods), each of them eventually associates a key (for example, the value of the indexed column) with table rows that contain this key. Each row is identified by TID (tuple ID), which consists of the number of block in the file and the position of the row inside the block.
 It is important to understand that an index speeds up data access at a certain maintenance cost. For each operation on indexed data, whether it be insertion, deletion, or update of table rows, indexes for that table need to be updated too, and in the same transaction. Note that update of table fields for which indexes haven't been built does not result in index update; this technique is called HOT ([[Heap Only Tuples]]).
