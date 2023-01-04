@@ -7,8 +7,8 @@ These are the available isolation levels in PG, and the types of phenomenon each
 |------------------|--------------|----------------------|---------------|-----------------------|
 | Read Uncommitted | Possible*    | Possible             | Possible      | Possible              |
 | Read Committed   | Not Possible | Possible             | Possible      | Possible              |
-| Repeatable read  | Not Possible | Possible             | Possible*     | Possible              |
-| Serializable     | Not Possible | Possible             | Not Possible  | Not Possible          |
+| Repeatable read  | Not Possible | Not Possible             | Possible*     | Possible              |
+| Serializable     | Not Possible | Not Possible             | Not Possible  | Not Possible          |
 `* - is allowed in general as per the definition in ANSI SQL, but are not possible in PG
 
 
