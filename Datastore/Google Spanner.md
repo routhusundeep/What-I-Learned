@@ -1,5 +1,7 @@
-#+TITLE: Daily Notes Wednesday, 25/12/2019
-** [[https://blog.acolyer.org/2015/01/08/spanner-googles-globally-distributed-database/][Spanner]]                                     :database:google:data:spanner:
+
+[paper](https://blog.acolyer.org/2015/01/08/spanner-googles-globally-distributed-database/)
+
+#relational_database #real_world_system #reread
 Many projects at goggle use BigTable, but some are not satisfied with, such projects generally have complex, evolving schemas, require strong consistency in the presence of wide area replication. Many applications prefer to use Megastore because of its semi relational data model and support for synchronous replication, despite its poor write throughput. As a result Spanner has evolved from BigTable like versioned key-value store into a temporal multi-version database. Data is stored in a schematized semi-relational tables; data is versioned, and each version is automatically timestamped with its current time; old versions of data are subject to configurable garbage-collection policies; and applications can read data at old timestamps.
 Some interesting features are 
 1. replication configuration can be controlled dynamically by the applications
@@ -8,7 +10,8 @@ Some interesting features are
 4. Data movement between the datacenters is dynamic and transparent
 5. provides external consistent reads and writes, and globally-consistent reads across the database at a time stamp
 6. These features allow Spanner to support consistent backups, consistent MapReduce executions, and atomic schema updates, all at global scale, and even in the presence of ongoing transactions
-*** Implementation
+
+### Implementation
 - Spanner deployment is called a deployment
 - organized as a set of zones, where each zone is the rough analog of a deployment of BigTable servers
 - zones are the locations across which data can be replicated and are physically isolated
@@ -16,7 +19,8 @@ Some interesting features are
 - The universe master and placement driver are singletons
 - The universe master is primarily a console that displays status information of all zones for interactive debugging
 - The placement driver handles automated movement of data across zones on the timescale of minutes
-**** Spanserver Software Stack
+
+#### Spanserver Software Stack
 - Each one handles between 100 to 1000 instances of data structure called a tablet
 - A tablet will have data with a timestamp, so Spanner is similar to multi version database
 - A tablet state is stored in set of B-tree-like files and a write-ahead log, all on Colossu
@@ -29,7 +33,8 @@ Some interesting features are
 - The lock table contains the state for two-phase locking: it maps ranges of keys to lock state
 - transaction manager is implemented at the leader
 - if a transaction involves only one Paxos group then it can bypass the manager otherwise a two phase lock is required between the participating groups(technically, it is between the leaders)
-**** Directories and Placement
+
+#### Directories and Placement
 - Supports a bucketing abstraction called a directory
 - directory is a set of contiguous keys with a common prefix
 - It is the unit of data placement, when data moves it moves the directory by directory
@@ -37,11 +42,13 @@ Some interesting features are
 - Paxos group can contain multiple directories, so a tablet can encapsulate multiple partitions in the row space, this decision is made so that frequently accessed data can be co-located
 - Movedir handles directory movement and add/remove replicas, data movement is not atomic, when all but a nominal data is moved, it moves the remaining data and updates the group information transactionally
 - directory can be split into fragments if their size increases more than a threshold
-**** Data Model
+
+### Data Model
 - Very similar to relational, but not pure
 - every table is required to have an ordered set of one or more primary keys
 - hierarchy in the schemas are supported
-*** True Time
+
+### True Time
 - API
   - TT.now() - TTInterval:[earliest, latest]
   - TT.after(t) - true if t has definitely passed
@@ -58,7 +65,8 @@ Some interesting features are
 - GPS masters advertise uncertainty close to zero
 - Every daemon polls multiple masters to reduce vulnerability to error from one master, Marzullo's algorithm is detect and reject liars, and to synchronize itself with the non-liars
 - Between synchronizations, the daemon advertises a slowly increasing time uncertainty, which is conservative worst case estimate
-*** Concurrency Control
+
+### Concurrency Control
 True time is used to guarantee the correctness property, implement features like externally consistent transactions, lock free read-only transactions and non-blocking reads in the past
 **** Timestamp Management
 - supports
@@ -69,7 +77,8 @@ True time is used to guarantee the correctness property, implement features like
 - RO will be executed on any replica that is sufficiently up to date without blocking the writes
 - SR will happen an any replica that is sufficiently up to date, the clients mention an exact time or upper bound of the timestamp
 - for RO and SR a read position will be given to the client so that the queries are retryable
-***** Paxos Leader Leases
+
+#### Paxos Leader Leases
 - uses timed leases to make leaderships long lived
 - upon receiving a quorum of lease votes, the leader is said to have a lease
 - A replica extends its lease vote implicitly upon write
@@ -77,7 +86,8 @@ True time is used to guarantee the correctness property, implement features like
 - the following disjoint invariant will be held
   - for each Paxos groups: each Paxos leader's lease interval is disjoint from every other leader's
   - read the appendix to find out how
-***** Assigning Timestamps to RW transactions
+
+#### Assigning Timestamps to RW transactions
 - RW uses two phase locking
 - so, they can assigned timestamps at any time when all locks have been acquired, before any locks have been released
 - For a given transaction, Spanner assigns it the timestamp that Paxos assigns to the Paxos write that represents the transaction
@@ -86,7 +96,8 @@ True time is used to guarantee the correctness property, implement features like
   - easy to prove using the disjoint invariant
 - Other external variant is maintained
   - if start of T2 occurs after the commit of T1 then commit timestamp of T2 is greater than the commit timestamp of T1
-***** Serving Reads at a Timestamp
+
+#### Serving Reads at a Timestamp
 - Every replica keeps track of a safe time
 - safe time = minimum of( safe time of Paxos state machine, safe time of transaction manager)
   - paxos safe is nothing but the time of previous Paxos write
@@ -97,8 +108,9 @@ True time is used to guarantee the correctness property, implement features like
 - if the scope is across multiple groups then
   - ideally negotiation should happen across all the leaders but it is time consuming
   - so, TT.now().latest is assigned, but the replica should wait till this has passed the safe time to deliver the result
-**** Details
-***** RW transactions
+
+####  Details
+#### RW transactions
 - writes are buffered till commit, so reads cant see the writes
 - reads use wound wait to prevent deadlocks
 - client issues reads to the leader of appropriate group
@@ -109,12 +121,14 @@ True time is used to guarantee the correctness property, implement features like
   - It waits for all the non-coordinator timestamps, and assigns a timestamp greater than all of them and any timestamp it has assigned before
   - logs a commit record through Paxos
   - waits for this time to pass, then sends this timestamp to the non-coordinators
-***** RO transactions
+
+##### RO transactions
 Already discussed
-***** Schema change transactions
+#### Schema change transactions
 - prepare phase explicitly assigns a timestamp in the future(t)
 - for reads and writes which implicitly depend on the schema, continues for the previous schema before t but are blocked before the change if after t
-***** Refinements
+
+### Refinements
 - safe time of transaction manager can be fine grained to include key ranges, otherwise irrelevant reads must wait for the writes
 - similarly LastTs()
 - safe Paxos time also has a weakness, a SR at t cannot execute on a Paxos group whose last write happened before t
