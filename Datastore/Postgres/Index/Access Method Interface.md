@@ -58,6 +58,7 @@ postgres=# select p.name, pg_index_has_property('t_a_idx'::regclass,p.name)     
  backward_scan | t
 (4 rows)
 ```
+
 |Name|Description|
 |----|-----|
 |`clusterable`|Can the index be used in a `CLUSTER` command?|
