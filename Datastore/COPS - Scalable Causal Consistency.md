@@ -65,7 +65,7 @@ After a write completes locally, the primary node places it in a replication que
 The client library in COPS-GT stores the client’s context in a table of $(key, version, deps)$ entries
 
 #### Writing Values in COPS and COPS-GT
-> ${bool,vers} ← put\_after (key, val, [deps], nearest, vers=\phi)$
+> ${bool,vers} ← put\textunderscore after (key, val, [deps], nearest, vers=\phi)$
 
 ##### Local
 The put after operation ensures that val is committed to each cluster only after all of the entries in its dependency list have been written. In the client’s local cluster, this property holds automatically, as the local store provides linearizability
@@ -74,11 +74,11 @@ The primary storage node uses a [Lamport timestamp](https://en.wikipedia.org/wik
 ##### Between clusters
 After a write commits locally, the primary storage node asynchronously replicates that write to its equivalent nodes
 a node that receives a put after request from another cluster must determine if the value’s nearest dependencies have already been satisfied locally.
-> $bool ← dep\_check (key, version)$
+> $bool ← dep\textunderscore check (key, version)$
 
 
 #### Reading Values in COPS
-> $value, version, deps ← get\_by\_version (key, version=LATEST)$
+> $value, version, deps ← get\textunderscore by\textunderscore version (key, version=LATEST)$
 
 #### Get Transactions in COPS-GT
 
