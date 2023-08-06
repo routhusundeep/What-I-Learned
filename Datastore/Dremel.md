@@ -11,7 +11,6 @@ The main contributions of this paper are
 
 ### Data Model
 It is based on strongly typed nested records which originated from [Protocol Buffers](https://developers.google.com/protocol-buffers)
-Its abstract syntax is $T = dom\ |\ <A_1 : T ..... A_n:T>$, where $dom$ is the set of all primitives like integers, strings etc
 
 ### Nested Column Storage
 The challenges addressed are 
@@ -34,7 +33,7 @@ Values alone do not convey the structure of a record. Repetition level and defin
 The algorithm is mentioned in the appendix of the paper
 
 #### Record Assembly 
-You can find this also in the appendix. I think, this algorithm helps you to develops a good intuition about levels and their usage, a truly novel and brilliant idea.
+You can find this also in the appendix. This algorithm helps you to develops a good intuition about levels and their usage, I am surprised that it could be done so elegantly, brilliant.
 
 ### Query language
 Out of scope of the paper, only a sample is described
