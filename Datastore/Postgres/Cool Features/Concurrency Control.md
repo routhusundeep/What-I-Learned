@@ -1,4 +1,5 @@
 #postgres #sql
+
 Internally, data consistency is maintained by using a multiversion model (Multiversion Concurrency Control, MVCC).
 The main advantage of using the MVCC model of concurrency control rather than locking is that in MVCC locks acquired for querying (reading) data do not conflict with locks acquired for writing data, and so reading never blocks writing and writing never blocks reading. PostgreSQL maintains this guarantee even when providing the strictest level of transaction isolation through the use of an innovative _Serializable Snapshot Isolation_ (SSI) level.
 

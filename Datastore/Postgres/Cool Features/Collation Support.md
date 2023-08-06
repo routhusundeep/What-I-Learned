@@ -1,4 +1,5 @@
 #postgres #sql
+
 The collation feature allows specifying the sort order and character classification behavior of data per-column, or even per-operation. This alleviates the restriction that the `LC_COLLATE` and `LC_CTYPE` settings of a database cannot be changed after its creation.
 
 ```

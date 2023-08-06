@@ -1,4 +1,5 @@
 #postgres #sql
+
 ```SQL
 SELECT * FROM generate_series(2,4);
  generate_series

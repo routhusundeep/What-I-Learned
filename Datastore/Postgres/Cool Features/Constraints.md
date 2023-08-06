@@ -1,4 +1,5 @@
 #postgres #sql
+
 ### Constraints
 - Check Constraints
 ```SQL
