@@ -1,5 +1,4 @@
-[paper](http://www.cs.cmu.edu/~dga/papers/cops-sosp2011.pdf)
-#database 
+[paper](http://www.cs.cmu.edu/~dga/papers/cops-sosp2011.pdf) #datastore
 
 Wow! This scratched an itch I didn't know I had.
 

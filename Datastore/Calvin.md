@@ -1,5 +1,5 @@
 [paper](http://cs.yale.edu/homes/thomson/publications/calvin-sigmod12.pdf)
-#relational_database #real_world_system #database 
+#relational_database #real_world_system #datastore
 
 Wow, This one took me some time to complete!
 

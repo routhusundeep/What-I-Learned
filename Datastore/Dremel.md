@@ -1,5 +1,4 @@
-[paper](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36632.pdf)
-#database #column_store #real_world_system 
+[paper](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36632.pdf) #datastore #column_store #real_world_system 
 
 Supports interactive analysis of very large data over shared clusters of commodity machines. Unlike traditional databases, it is capable of operating on in place nested data structures. It builds its architecture from web search serving tree, which pushes the query down the tree and rewrites it at every step. It executes the query natively without converting them into map reduce jobs. Lastly, and more importantly, it uses a novel column striped storage which tremendously reduces the amount of data read from secondary storage and provided cheaper compression which in-turn reduces the CPU cost.
 

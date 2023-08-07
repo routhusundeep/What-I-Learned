@@ -1,6 +1,6 @@
 [paper](https://github.com/papers-we-love/papers-we-love/blob/main/datastores/bigtable-a-distributed-storage-system-for-structured-data.pdf)
 
-#real_world_system #database 
+#real_world_system #datastore 
 
 I have read it a couple of times. A classic!
 

@@ -1,4 +1,4 @@
-[paper](https://www.vldb.org/pvldb/vol7/p181-bailis.pdf) #database #availability
+[paper](https://www.vldb.org/pvldb/vol7/p181-bailis.pdf) #datastore #availability
 
 ## Key Takeaways
   - The default configuration of most of the popular database systems expose a range of anomalies which may not be what the application desire

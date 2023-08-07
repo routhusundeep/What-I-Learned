@@ -1,4 +1,4 @@
-[paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/acac3b090a577348a7106d09c051c493298ccb1d.pdf) #database #relational_database #real_world_system #reread 
+[paper](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/acac3b090a577348a7106d09c051c493298ccb1d.pdf) #datastore #relational_database #real_world_system #reread 
 
 ### Brief Background
 - sharded(range) geo-replicated relational database

@@ -1,4 +1,4 @@
-#database #nosql
+#nosql #datastore
 
 [paper](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.161.6751&rep=rep1&type=pdf)
 [Apache Cassandra Site](https://cassandra.apache.org/doc/latest/cassandra/data_modeling/index.html)

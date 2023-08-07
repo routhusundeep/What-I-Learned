@@ -1,4 +1,4 @@
-[blog](http://dbmsmusings.blogspot.com/2019/06/correctness-anomalies-under.html) #database #reread 
+[blog](http://dbmsmusings.blogspot.com/2019/06/correctness-anomalies-under.html) #reread 
 - P - Possible
 - NP - Not Possible
 
