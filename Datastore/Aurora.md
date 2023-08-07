@@ -1,6 +1,8 @@
-#+TITLE: Daily Notes Monday, 13/01/2020
-** [[https://www.allthingsdistributed.com/files/p1041-verbitski.pdf][Aurora]]                                                   :database:amazon:
-*** Introduction
+
+[paper](https://www.allthingsdistributed.com/files/p1041-verbitski.pdf) #real_world_system #relational_database #reread 
+
+
+### Introduction
 - Industry need capacity on a flexible on-demand basis
 - achieved by typically decoupling storage and compute
 - storage is replicated over multiple machines
@@ -14,8 +16,9 @@
   - by making storage as independent, fault-tolerant and self-healing service across multiple data-centers, the database is protected from performance variance and transient or permanent failures at either the networking or storage tiers. failure in durability can be modeled as a long lasting availability event, and a availability event can be modeled as a long-lasting performance variation
   - by only writing redo log records to storage, we can reduce network IOPS by an order of magnitude
   - move some of the most complex and critical function(backup and redo recovery) from one-time expensive operations in the database engine to continuous asynchronous operations amortized across the storage fleet
-*** Durability at Scale
-**** Replication and Correlated Failures
+
+### Durability at Scale
+#### Replication and Correlated Failures
 - Instances fail, get shut down, new ones get added, so decouple the compute from storage
 - storage nodes fail, so replicate
 - uses quorum-based voting protocol to tolerate failures
@@ -23,7 +26,7 @@
 - tolerates
   - losing an entire AZ(availability zone) and a node, without losing the data
   - can write even when an AZ is lost
-**** Segmented Storage
+#### Segmented Storage
 - MTTF(mean time to failure) can't be reduce for independent failures, so tries to reduce MTTR(mean time to repair)
 - database volume is partitioned into segments, of size 10GB.
 - segments are replicated 6 ways into PGs(Protection groups) across 3 AZs
@@ -37,11 +40,12 @@
   - heat management, a segment is marked as a hot disk until fixed
   - OS and security patching, brief unavailability event at the segment
   - software upgrades, one AZ at a time and ensure no more than one member of a PG
-*** The LOG is the Database
-**** The Burden of Amplified Writes
+
+### The LOG is the Database
+#### The Burden of Amplified Writes
 - 4/6 write quorum, though resilient, will suffocate the network bandwidth and is not tenable with a straight forward MySQL
 - The section explains all the cross instance data transfers happening in a MySQL setup
-**** Offloading Redo Processing to Storage
+#### Offloading Redo Processing to Storage
 - Transaction commit only writes the log, the data page write is deferred
 - only these redo log records are sent across the network
 - No pages are ever written from the database tier
@@ -54,7 +58,7 @@
 - The storage tier will see unamplified writes, since it is only one of the size copies
 - Moving processing to storage also improved availability by minimizing crash recovery time and eliminates jitter caused by background processes such as checkpointing, background data page writing and backups
 - Nothing is required at instance startup, any read request for a data page will require some redo records to be applied if the page is not current
-**** Storage Service Design Points
+#### Storage Service Design Points
 - core design tenet is to minimize the latency of foreground write request
 - steps are
   - receive log records and add it to a in-memory queue
@@ -65,8 +69,9 @@
   - periodically stage logs and new records to S3
   - periodically GC old versions
   - periodically validate CRC codes on pages
-*** The LOG Marches Forward
-**** Solution Sketch: Asynchronous Processing
+
+### The LOG Marches Forward
+#### Solution Sketch: Asynchronous Processing
 - each log record has a sequence number that is monotonically increasing(LSN)
 - we maintain points of consistency and durability, and continually advance these points as we receive acknowledgements for outstanding storage requests
 - upon restart, before the database is allowed to access the storage, the storage service does its own recovery which is focused not on user-level transactions, but making sure that the database sees an uniform view despite its distributed nature
@@ -76,7 +81,8 @@
   - Each database-level transaction is broken up into multiple mini-transactions(MTR) that are ordered and must be performed atomically
   - Each MTR is composed of multiple contiguous log records
   - The final record in a MTR is its CPL
-**** Normal Operation
+
+#### Normal Operation
 - Writes
   - new LSN is given for each log record with a constrain that LSN < VDL + configured number(currently 10 million), this introduces back pressure, in case the storage or network cant keep up
   - Each log record contains a backlink to identify the previous record
@@ -101,7 +107,7 @@
   - only applies if LSN > VDL
   - log records as part of single MTR are applied atomically
   - typically reader lags by 20 ms
-*** Recovery
+
+### Recovery
 - the system contacts each PG, a read quorum of segments which is sufficient to guarantee discovery of any data that could have reached a write quorum
 - once a read quorums are established, it recalculates the VDL above which the data is truncated by generating a truncation range
-- 
