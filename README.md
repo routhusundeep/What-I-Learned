@@ -5,5 +5,5 @@ A disclaimer, most of the content in the notes is plagiarized from the papers. N
 The process I generally follow is:
 * First read - just read and understand the paper
 * Second read - copy excepts and take notes
-* Third read - write my own opinion concisely
+* Third read - write my own opinion concisely, admittedly, I am behind on this :see_no_evil:
 
