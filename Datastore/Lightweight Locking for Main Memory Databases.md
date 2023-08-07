@@ -1,5 +1,4 @@
-#database #locking
-[paper](http://www.cs.umd.edu/~abadi/papers/vll-vldb13.pdf)
+[paper](http://www.cs.umd.edu/~abadi/papers/vll-vldb13.pdf) #database #locking
 
 ### Introduction
 The most common way to implement a lock manager is as a hash table that maps each lockable record’s primary key to a linked list of lock requests for that record. This list is typically preceded by a lock head that tracks the current lock state for that item. For thread safety, the lock head generally stores a mutex object, which is acquired before lock requests and releases to ensure that adding or removing elements from the linked list always occurs within a critical section. Every lock release also invokes a traversal of the linked list for the purpose of determining what lock request should inherit the lock next.

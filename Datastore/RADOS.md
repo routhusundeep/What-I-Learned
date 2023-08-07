@@ -1,6 +1,4 @@
-#distributed_file_system
-
-[paper](https://ceph.com/assets/pdfs/weil-rados-pdsw07.pdf)
+[paper](https://ceph.com/assets/pdfs/weil-rados-pdsw07.pdf) #distributed_file_system
 
 RADOS, a Reliable, Autonomic Distributed Object Store that seeks to leverage device intelligence to distribute the complexity surrounding consistent data access, redundant storage, failure detection, and failure recovery in clusters consisting of many thousands  
 of storage device. It facilitates an evolving, balanced distribution of data and workload across a dynamic and heterogeneous storage cluster while providing applications with  

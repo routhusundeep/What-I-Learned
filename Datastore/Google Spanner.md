@@ -1,7 +1,5 @@
+[paper](https://blog.acolyer.org/2015/01/08/spanner-googles-globally-distributed-database/) #relational_database #real_world_system #reread
 
-[paper](https://blog.acolyer.org/2015/01/08/spanner-googles-globally-distributed-database/)
-
-#relational_database #real_world_system #reread
 Many projects at goggle use BigTable, but some are not satisfied with, such projects generally have complex, evolving schemas, require strong consistency in the presence of wide area replication. Many applications prefer to use Megastore because of its semi relational data model and support for synchronous replication, despite its poor write throughput. As a result Spanner has evolved from BigTable like versioned key-value store into a temporal multi-version database. Data is stored in a schematized semi-relational tables; data is versioned, and each version is automatically timestamped with its current time; old versions of data are subject to configurable garbage-collection policies; and applications can read data at old timestamps.
 Some interesting features are 
 1. replication configuration can be controlled dynamically by the applications

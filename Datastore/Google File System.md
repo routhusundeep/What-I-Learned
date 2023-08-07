@@ -1,5 +1,4 @@
-#google  #real_world_system  #distributed_file_system 
-[paper](https://static.googleusercontent.com/media/research.google.com/en/us/archive/gfs-sosp2003.pdf)
+[paper](https://static.googleusercontent.com/media/research.google.com/en/us/archive/gfs-sosp2003.pdf) #google  #real_world_system  #distributed_file_system 
 
 We have reexamined traditional choices and explored radically different points in the design space. Some key departures from earlier files systems are.
 - Component failures are the norm rather than the exception.
