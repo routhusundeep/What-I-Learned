@@ -36,7 +36,6 @@ Calvin maintains multiple replicas, and they do not diverge since they perform t
 For deterministic events, each node involved in a transaction waits for a one-way message from each node that could potentially deterministically abort the transaction, and only commits once it receives these messages.
 
 ### System Architecture
-![[Screenshot 2023-08-05 at 4.51.40 PM.png]]
 
 #### Sequencer and replication
 Calvin divides time into 10-millisecond epochs during which every machine’s sequencer component collects transaction requests from clients. At the end of each epoch, all requests that have arrived at a sequencer node are compiled into a batch. This is the point at which replication of transactional inputs occurs.
