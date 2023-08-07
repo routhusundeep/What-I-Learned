@@ -1,9 +1,10 @@
-#+TITLE: Daily Notes Wednesday, 22/01/2020
-** [[http://web.mit.edu/6.829/www/currentsemester/papers/only-just-works.pdf][Why the Internet only just works]]                       :internet:networks:
-I have always been fascinated by networks, but I never deep dived into this topic due to a paranoia which stemmed from my Bachelors classes. This is a gold mine of information for a beginner in networks like me, a succint and well written paper describing the history and current state of the internet, the various problems the all-mighty internet has faced and how these problems were solved by various means, most of which have passed the test of time.
 
+[paper](http://web.mit.edu/6.829/www/currentsemester/papers/only-just-works.pdf) #real_world_system #networking #reread 
+
+I have always been fascinated by networks, but I never deep dived into this topic due to a paranoia which stemmed from my Bachelors classes. This is a gold mine of information for a beginner in networks like me, a succint and well written paper describing the history and current state of the internet, the various problems the all-mighty internet has faced and how these problems were solved by various means, most of which have passed the test of time.
 Without further ado.
-*** 1970 - 1993
+
+### 1970 - 1993
 - ARPAnet - first large scale packet switching network
 - The switch over to TCP/IP was done on 1 January 1983
   - This was a flag day, easily done due to its small scale of 400 nodes
@@ -17,11 +18,12 @@ Without further ado.
 - Mobile IP was a adaptation failure
 - End to End IP Multicast is under utilized
 - quality of service should also be used to mitigate various problems
-*** The future - stagnation
+
+### The future - stagnation
 - significant changes are MPLS and VPN
 - IP layer and above are stagnated
-- like mentioned, QOS and IP Mobility are not adopted
-- End-to-end, there is a decrease in transparency, the main reason is security(firewalls)
+- QOS and IP Mobility are not adopted
+- End-to-end, there is a decrease in transparency, the main reason is security (firewalls)
 - NATs also inhibit transparency
   - them not being part of the internet architecture is a problem, as they cannot be addressed directly
   - reason for them is not IPV4 exhaustion, but ISPs charging per IP address
@@ -29,41 +31,45 @@ Without further ado.
   - unnatural to go away even in the advent of IPV6
   - along with firewall, NATs are TCP specific, other protocols are increasingly harder to implement
     - VoIP which uses UDP is tricky
-    - has to reverse engineer the NAT functionality to get around it(Skype does this0
+    - has to reverse engineer the NAT functionality to get around it (Skype does this)
 - deep packet inspection may make incremental change harder
 - no substantial change in layer 3 for a decade
 - no substantial change in layer 4 for 2 decades
-*** Convergence
+
+### Convergence
 - VoIP, IPTV etc are needed on the internet now
-- This will force the internet to adopt to other use cases
-*** Architectural problem
-**** Short term 
+- This will force the internet to adapt to other use cases
+
+### Architectural problem
+#### Short term 
 - Spam
   - SPIT - spam over internet telephony
 - Security
   - taint tracking
-  - biggest problem
+  - the biggest problem
 - Denial of service
   - Distributed DOS
-  - DNS reflection attacks and many other like this
+  - DNS reflection attacks and many others like this
 - Application deployment
   - firewall issue - everything unknown is a potential threat, so new deployment will not work
   - many new applications look like HTTP as a workaround
   - like mentioned, Skype is a good example
-**** Medium term
+
+#### Medium term
 - Congestion Control
   - with increase in link speed, congestion may rise again
   - must support all protocols, not just TCP
   - new scheme must be done incrementally, backward compatible with TCP
 - Inter-domain routing
   - BGP will not satisfy
-  - I did not understand it, I will write about BGP in the future
+  - I did not understand it, I will read about BGP in the future
 - Mobility
   - right now, mobile devices solve it at layer 2, laptops solve it via DHCP
-  - need to addressed in the future, due to increasing mobile devices
+  - need to be addressed in the future, due to increasing mobile devices
 - Multi-homing
   - technically, all the systems(even in different ISPs) will have the same prefix
   - address aggregation should be prevented in routing announcements, otherwise routing should be done on the edge nodes, BGP will likely not cope with the increase in the number of advertised routes
-**** Longer term
+
+#### Longer term
 - Address space depletion
   - IPv6 is still rare today
