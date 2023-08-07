@@ -1,81 +1,11 @@
-#+TITLE: Daily Notes Wednesday, 11/12/2019
-** [[http://people.csail.mit.edu/matei/courses/2015/6.S897/readings/google-dataflow.pdf][The dataflow Model]]                   :dataflow_model:
-A model to represent processing for Unbound, Unordered and global-scale datasets.
-- Existing engines(at the time of writing)
-  - fault tolerance ambiguity - Aurora, TelegraphCQ etc
-  - lacking exactly-once semantics - Storm, Samza, Pulsar
-  - no temporal windowing primitives - Tigon
-  - limiting window capabilities to only tuple and/or processing time - Spark Streaming, Trident
-  - event time based on ordering - SQLStream
-  - limited window tiggers to event time - Flink/Stratosphere
-  - too complex - Lambda Architecture
-- Conceptual Contributions
-  - Allows for the calculation of event time ordered results, windows by features of the data themselves, over an unbounded, unordered data source, with tunable correctness, latency and other parameters.
-  - Decomposes pipeline across four related dimensions, providing clarity, composability and flexibility
-    - What results are being computed
-    - Where in event time they are being computed
-    - When in processing time they are materialized
-    - How earlier results relate to later refinements
-  - Abstracts out the Logical notion of data processing from the underlying physical execution, allowing the choice of different engines like batch, micro-batch and stream depending on the required correctness, latency etc
-- Concrete Contributions
-  - Windowing model
-  - Triggering model that binds the output times of results depending on the runtime characteristics of the pipeline.
-  - An incremental processing model that supports retraction and updates 
-  - Scalable implementation
-  - A set of core principles
-  - Based on real-world examples
-- Unbounded/Bounded vs Stream/Batch
-  - former is a property of data set while later is the property of the processing engine
-- Windowing
-  - Fixed
-  - Sliding
-  - Session
-- Time Domain
-  - Event time
-  - Processing time
-- DataFlow Model
-  - Core
-    - ParDo - similar to flatMap
-    - groupByKey
-  - Windowing
-    - Set<Window> assignWindows(T datum) - assigns windows to an element
-    - Set<Window> mergeWindows(Set<Window> windows) - merges multiple windows
-    - element is a tuple of key, value, event time and window
-      - by default window is a global window
-    - An example with Session window is given in the paper, go through it to get a better picture
-  - Triggers and incremental processing
-    - Addressing the shortcomings
-      - supporting tuple and processing time based windows
-      - when to emit the results of a window operation
-    - Watermarks alone can't solve as they correspond to event time
-    - Predefined triggers
-      - completion estimates - watermarks, percentile watermark
-      - data estimates - number of bytes, count of elements, data punctuations
-      - logical composition is possible
-      - external signals - data injection requests, RPC completion callbacks etc
-    - Relation between multiples panes of windows
-      - Discarding - independent of each other
-      - Accumulating - depends on the previous window
-      - Accumulating and retracting
-        - A bit complex than the other but incredibly useful
-        - it has all accumulating relation properties, but emits a retraction signal too when a trigger happens, this signal will be picked up the further consumers to correct their state
-  - differences between window and trigger
-    - Windowing determines where in event time data are grouped for processing
-    - Triggers determine when in processing time the grouped results are emitted
-- A bunch of examples are given to emphasize the usefulness, pliability and briefness of the proposed model
-- Design Principles
-  - Never assume completion
-  - Be flexible
-  - Make sense and Add Value
-  - Encourage clarity of implementation
-  - Support robust analysis of data in the context under which they occurred
+[One SQL to rule them all](https://arxiv.org/pdf/1905.12133.pdf) 
 
-** [[https://arxiv.org/pdf/1905.12133.pdf][One SQL to rule them all]]                               :stream_processing:
 This paper aims to achieve stream processing by SQL alone, current SQL cant do this, they propose some language extensions and primitives to achieve their goal.  
 These are
 1. Time varying relations as a foundation for classical tables as well as streaming data
 2. Event time semantics
 3. A limited set of optional keyword extensions to control the materialization of time varying results
+
 Foundations
 - Time varying relations
   - Do not differentiate between classical relations and streams, both will work on a more general abstraction called TVR(time varying relations)

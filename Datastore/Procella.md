@@ -1,5 +1,6 @@
-#+TITLE: Daily Notes Tuesday, 17/12/2019
-** [[https://blog.acolyer.org/2019/09/11/procella/][Procella - unifying serving and analytical data at youtube]] :database:google:
+[paper](https://blog.acolyer.org/2019/09/11/procella/) #real_world_system #reread 
+
+unifying serving and analytical data at youtube
 Attacking the following patterns
 1. Reporting and Dashboarding   
    - Video creators, content holders and stakeholders require access to real time dashboards to understand how their videos and channels are performing
@@ -23,8 +24,8 @@ To solve these problems, Procella has
 4. Data Freshness  
    - High Volume, low latency ingestion is supported in both batch and Stream mode, native support to Lambda Architecture
 
-*** Architecture
-**** Google Infrastructure
+### Architecture
+#### Google Infrastructure
 1. Disaggregated Storage -   
    - All data will be stored in Colossus, which differs from normal file systems, like
    - Data is immutable. A file can be opened and appended to, but once finalized, it cannot be modified
@@ -35,7 +36,7 @@ To solve these problems, Procella has
    - Vertical scaling will be challenging and many tasks may run concurrently on the same machine, so to improve overall performance it is better to run many small tasks than a small number of large tasks
    - Machines can be brought down for maintenance, so tasks should be able to recover quickly, this strengths the argument of small and stateless task
    - Machines can be of different configurations, some better, some worse, Performance of a task will be unpredicatable
-**** Procella's Data
+#### Procella's Data
 1. Data Storage
    - Data is organized as tables
    - table is stored across multiple files, also referred to as tablets or partitions
@@ -66,15 +67,16 @@ To solve these problems, Procella has
 6. Compaction
    - Compacts data written by IgS regularly
    - updates RgS with the compacted information
-**** Query Life cycle
+#### Query Life cycle
 - Clients send the queries to Root Server(RS)
 - RS does parsing, rewrites, planning and optimizations
 - plan structure - query blocks are nodes and edges are streams of data
 - The Data Server(DS) receives plan from RS or other DS
 - does most of heavy lifting, such as reading from Colossus/local memory/RDMA or other DS
 - data servers use Stubby/gRPC and RDMA for shuffle(interesting)
-*** Optimizations
-**** Caching
+
+### Optimizations
+#### Caching
 - Colossus Metadata Caching
   - Data servers cache file handles avoiding one or more RPC
 - Header Caching
@@ -91,7 +93,7 @@ To solve these problems, Procella has
   - Caches are more effective when a server stores a small subset of data
   - so Procella makes sure that the data requests are sent to the DS which stores that subset with high probability ensuring high cache hit ratio
   - note that affinity is loose, even if a request is sent to a different DS, the DS can retrieve data from the durable storage, this provides high availability
-**** Data Format
+#### Data Format
 First implementation used Capacitor, which is designed for large scans ad-hoc workload, so a new format called Artus is developed, 
 - Uses custom encoding, avoid generic ones like LZW, so seek to a single row can be done without a scan, which makes it suitable for small point lookups and range scans
 - Multi pass adaptive encoding, parses once to collect lightweight information and uses this information to determine a suitable encoding
@@ -105,20 +107,23 @@ First implementation used Capacitor, which is designed for large scans ad-hoc wo
 - Rich meta data are stored in the file header like range, bloom filters etc
 - inverted indexes are also supported
   - roaring bitmaps are used to store the indices
-*** Evaluation Engine
+
+### Evaluation Engine
 normally LLVM will be used to convert the execution plan to native code at query time, but this becomes bottleneck at high QPS, so a evaluation engine is created called Superluminal.
 - C++ template meta programming is used extensively for code generation, can avoid large virtual call overhead
 - Data is processed in blocks to take advantages of vectorized operations(intel's SIMD operations)
 - Operates on the natively encoded data, and preserves the encoding whenever possible during functional operations
 - Processed structures are fully columnar format
 - Filters and projections are pushed downwards dynamically
-*** Partitioning and Indexing
+
+### Partitioning and Indexing
 - multi level partitioning and clustering is supported
 - typically fact tables are partitioned on date
 - dimensions are partitioned over key
 - metadata server(MDS) has this information
-*** Distributed operations
-**** Distributed Joins
+
+### Distributed operations
+#### Distributed Joins
 The following joins are supported
 - Broadcast
 - Co-partitioned, the inner and outer table can be partitioned on the same key
@@ -130,15 +135,16 @@ The following joins are supported
   - then all the possible the join keys are sent to the DS containing the probe tables
   - the probe tables with the join keys are sent to the build tables
   - note that filters and projections can also be sent for further optimizations
-**** Addressing Tail Latency
+#### Addressing Tail Latency
 - The RS employs an effective backup strategy, it maintains quantiles of DS responses, if a query takes much more time than median then the request will be sent to another DS
 - rate limiting and batching queries for the DS
 - priority of queries is sent to DS
   - high for small queries and low for large queries
-**** Intermediate Merging
+#### Intermediate Merging
 For heavy aggregations, intermediate operators are induced into the plan so that the processing can happen in parallel along with the data retrieval
-*** Query Optimizations
-**** Virtual Tables
+
+### Query Optimizations
+#### Virtual Tables
 A common approach to achieve better performance for high QPS  queries is materialized views, some approaches to it are
 - Index aware aggregate selection
   - aware of partitioning and clustering, on the query predicate
@@ -147,7 +153,7 @@ A common approach to achieve better performance for high QPS  queries is materia
 - Lambda architecture awareness
   - Stitch(union) tables based on time column, so queries will be aware of both batch and stream tables
 - Join awareness
-**** Query Optimizer
+#### Query Optimizer
 - Rules based standard rewrites at query compile time
 - adaptive techniques at query execution time
   - it is stronger than traditional cost based optimizations
@@ -171,9 +177,11 @@ A common approach to achieve better performance for high QPS  queries is materia
   - for small queries there will be a large overhead
   - so user can provide query hints for small queries
   - Join ordering is not yet supported
-*** Data Ingestion
+
+### Data Ingestion
 Provides an offline tool to generate data in Procella accepted format, It is not necessary to use this
-*** Embedded Statistics
+
+### Embedded Statistics
 require millions of QPS for these queries with millisecond latency on a data at the scale of billions of records(funnily, the paper says that this size is "relatively small"), Procella solves this problem by running the instances in "stats serving" mode with specialized optimizations
 - When new data is registered, Rgs notifies the data servers so that it can be loaded into memory, this ensures that it can served without disk access
 - MDS is compiled into RS, this save RPC overhead between these sub-systems
@@ -182,5 +190,6 @@ require millions of QPS for these queries with millisecond latency on a data at 
 - RS batches the queries and sends it to both primary and secondary and faster response is returned, this helps in tail latency
 - RS and DS's are monitored for errors and latency fluctuations, the problem outlier tasks are moved to other machines
 - Most of the expensive optimizations and operations are disabled
-*** Performance
+
+### Performance
 you can look into the paper for these details
