@@ -1,4 +1,4 @@
-[paper](file:///Users/sundeep.routhu/Downloads/brewers-conjecture.pdf)
+[paper](https://github.com/papers-we-love/papers-we-love/blob/main/distributed_systems/brewers-conjecture.pdf)
 
 I don't know why I was afraid of this paper till now. Nancy Lynch is a genius.
 **Read the paper for the proofs**, I will only summarize them.
