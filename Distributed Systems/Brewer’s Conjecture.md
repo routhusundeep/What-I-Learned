@@ -14,8 +14,6 @@ For a distributed system to be continuously available, every request received by
 #### Partition Tolerance
 In order to model partition tolerance, the network will be allowed to lose arbitrarily many messages sent from one node to another. When a network is partitioned, all messages sent from nodes in one component of the partition to nodes in another component are lost.
 
-
-
 ### Asynchronous Networks
 **Theorem 1:** It is impossible in the asynchronous network model to implement a read/write data object that guarantees the following properties: 
 * Availability
