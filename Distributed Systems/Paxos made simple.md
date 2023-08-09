@@ -1,6 +1,6 @@
 [paper](https://github.com/papers-we-love/papers-we-love/blob/main/distributed_systems/paxos-made-simple.pdf)
 
-I was so excited to finally learn this legendary algorithm. Leslie Lamport is otherworldly.
+I was so excited to finally learn this. Leslie Lamport is otherworldly.
 Highly recommend reading [understanding paxos](https://understandingpaxos.wordpress.com/) too to get a better intuition.
 
 Read the paper to see the proofs, I will only be taking notes on theorems and corollaries.
