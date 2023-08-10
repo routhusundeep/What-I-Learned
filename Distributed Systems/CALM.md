@@ -24,3 +24,7 @@ Additionally, because they “change their mind”, non-monotonic programs are o
 In the context of nondeterministic message delivery, an operation on a single machine is confluent if it produces the same set of outputs for any nondeterministic ordering and batching of a set of inputs.
 
 The rest of the paper delves into why some design patterns and why CALM is useful. I recommend reading the paper if you are interested.
+
+#### CAP and CALM: Going Positive
+> Observation 1. Coordination-freeness is equivalent to availability under partition.
+
