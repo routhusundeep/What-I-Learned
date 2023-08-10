@@ -24,14 +24,14 @@ Of the two, informal reasoning is the most important by far because there is a l
 
 > "Those who want really reliable software will discover that they must find means of avoiding the majority of bugs to start with"
 > "Testing is hopelessly inadequate....(it) can be used very effectively to show the presence of bugs but never to show their absence"
-> - Dijkstra
+> \- Dijkstra
 
 ### Causes of Complexity
 ##### Complexity caused by State
 The reason that many of the errors exist is that the presence of state makes programs hard to understand. It makes them complex.
 
 > "From the complexity comes the difficulty of enumerating, much less understanding, all the possible states of the program, and from that comes the unreliability"
-> - Brooks
+> \- Brooks
 
 The single biggest remaining cause of complexity in most contemporary large systems is state, and the more we can do to limit and manage state, the better.
 
@@ -41,10 +41,10 @@ Concurrency is also a branch of Control
 
 ##### Complexity caused by Code Volume
 > "Many of the classic problems of developing software products derive from this essential complexity and its nonlinear increase with size"
-> - Brooks
+> \- Brooks
 
 > "It has been suggested that there is some kind of law of nature telling us that the amount of intellectual effort needed grows with the square of program length. But, thank goodness, no one has been able to prove this law. And this is because it need not be true.... I tend to the assumption — up till now not disproved by experience — that by suitable application of our powers of abstraction, the intellectual effort needed to conceive or to understand a program need not grow more than proportional to program length"
-> - Dijkstra
+> \- Dijkstra
 
 ##### Other causes of complexity
 - Complexity breeds complexity
@@ -58,7 +58,7 @@ Concurrency is also a branch of Control
 ##### Object-Orientation
 
 > "In a sense, object identity can be considered to be a rejection of the “relational algebra” view of the world in which two objects can only be distinguished through differing attributes"
-> - Baker
+> \- Baker
 
 The bottom line is that all forms of OOP rely on state (contained within objects) and in general all behavior is affected by this state. As a result of this, OOP suffers directly from the problems associated with state described above, and as such we believe that it does not provide an adequate foundation for avoiding complexity
 
