@@ -5,7 +5,7 @@ This adds on top of [[No Silver Bullet]]
 
 ### Complexity
 > "...we have to keep it crisp, disentangled, and simple if we refuse to be crushed by the complexities of our own making"
-> - Dijkstra
+> \- Dijkstra
 
 > "The general problem with ambitious systems is complexity."
 > "...it is important to emphasize the value of simplicity and elegance, for complexity has a way of compounding difficulties" 
