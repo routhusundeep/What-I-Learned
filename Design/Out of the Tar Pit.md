@@ -9,10 +9,10 @@ This adds on top of [[No Silver Bullet]]
 
 > "The general problem with ambitious systems is complexity."
 > "...it is important to emphasize the value of simplicity and elegance, for complexity has a way of compounding difficulties" 
-> - Corbato
+> \- Corbato
 
 > "I conclude that there are two ways of constructing a software design: One way is to make it so simple that there are obviously no deficiencies, and the other way is to make it so complicated that there are no obvious deficiencies. The first method is far more difficult."
->- Hoare
+>\- Hoare
 
 Complexity is the root cause of the vast majority of problems with software today. Unreliability, late delivery, lack of security — often even poor performance in large-scale systems can all be seen as deriving ultimately from unmanageable complexity.
 
