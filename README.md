@@ -7,6 +7,8 @@ The process I generally follow is:
 * Second read - copy excepts and take notes
 * Third read - write my own opinion concisely, admittedly, I am behind on this :see_no_evil:
 
+There are a lot of papers I have read but never got the chance to add them to this repo. Hopefully, I will get time to compiling all my interests and knowledge here.
+
 References:
 * [Papers we love](https://github.com/papers-we-love/papers-we-love)
 * [Reading in Distributed Systems](http://christophermeiklejohn.com/distributed/systems/2013/07/12/readings-in-distributed-systems.html)
